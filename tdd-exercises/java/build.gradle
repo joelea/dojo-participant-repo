@@ -1,0 +1,22 @@
+subprojects {
+  apply plugin: 'java'
+  apply plugin: 'eclipse'
+  apply plugin: 'idea'
+
+  repositories {
+    mavenCentral()
+  }
+
+  dependencies {
+    compile 'com.google.guava:guava:17.0'
+    testCompile 'org.hamcrest:hamcrest-all:1.3'
+    testCompile 'junit:junit:4.8.2'
+    testCompile 'org.mockito:mockito-all:1.9.5'
+
+  }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.8'
+}
+
