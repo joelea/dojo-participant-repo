@@ -1,4 +1,5 @@
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
 
@@ -8,11 +9,11 @@ public class ExtremeStartupTest {
 
     @Test
     public void should_accept_missing_input() {
-        assertEquals(server.answer(null), "team name");
+        assertThat(server.answer(null), equalTo("team name"));
     }
 
     @Test
     public void should_add_numbers() {
-        assertEquals(server.answer("what is the sum of 14 and 4"), "18");
+        assertThat(server.answer("what is the sum of 14 and 4"), equalTo("18"));
     }
 }
