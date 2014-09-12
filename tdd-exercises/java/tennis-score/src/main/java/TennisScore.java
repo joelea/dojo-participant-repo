@@ -1,7 +1,7 @@
 public interface TennisScore {
-    SimpleTennisScore playerOneScores();
+    TennisScore playerOneScores();
 
-    SimpleTennisScore playerTwoScores();
+    TennisScore playerTwoScores();
     
     String getDisplayString();
 }

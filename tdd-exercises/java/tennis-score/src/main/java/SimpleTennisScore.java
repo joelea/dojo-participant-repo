@@ -9,12 +9,20 @@ public class SimpleTennisScore implements TennisScore {
     }
 
     @Override
-    public SimpleTennisScore playerOneScores() {
+    public TennisScore playerOneScores() {
+        if(playerOne + 1 == 3 && playerTwo == 3) {
+            return new Deuce();
+        }
+
         return new SimpleTennisScore(playerOne + 1, playerTwo);
     }
 
     @Override
-    public SimpleTennisScore playerTwoScores() {
+    public TennisScore playerTwoScores() {
+        if(playerOne == 3 && playerTwo + 1 == 3) {
+            return new Deuce();
+        }
+
         return new SimpleTennisScore(playerOne, playerTwo + 1);
     }
     
