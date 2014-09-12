@@ -1,14 +1,14 @@
 
-public class LoveAll implements ITennisScore {
+public class LoveAll implements TennisScore {
 
     @Override
-    public TennisScore playerOneScores() {
-        return new TennisScore(1, 0);
+    public SimpleTennisScore playerOneScores() {
+        return new SimpleTennisScore(1, 0);
     }
 
     @Override
-    public TennisScore playerTwoScores() {
-        return new TennisScore(0, 1);
+    public SimpleTennisScore playerTwoScores() {
+        return new SimpleTennisScore(0, 1);
     }
 
     @Override

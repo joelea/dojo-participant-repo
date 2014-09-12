@@ -2,7 +2,7 @@
 
 public class TennisGame {
 
-    private ITennisScore score = new LoveAll();
+    private TennisScore score = new LoveAll();
 
     public String score() {
         return score.getDisplayString();
