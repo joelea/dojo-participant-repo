@@ -1,9 +1,12 @@
+package tennis.game.scores;
+
+import tennis.game.TennisScore;
 
 public class Victory implements TennisScore {
 
     private final String victor;
 
-    public Victory(String victor) {
+    private Victory(String victor) {
         this.victor = victor;
     }
 
@@ -20,6 +23,14 @@ public class Victory implements TennisScore {
     @Override
     public String getDisplayString() {
         return victor + " won";
+    }
+    
+    public static Victory forPlayerOne() {
+        return new Victory("Player 1");
+    }
+
+    public static Victory forPlayerTwo() {
+        return new Victory("Player 2");
     }
 
 }

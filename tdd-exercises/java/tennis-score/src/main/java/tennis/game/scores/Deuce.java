@@ -1,3 +1,6 @@
+package tennis.game.scores;
+
+import tennis.game.TennisScore;
 
 public class Deuce implements TennisScore  {
 

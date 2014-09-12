@@ -1,3 +1,6 @@
+package tennis.game.scores;
+
+import tennis.game.TennisScore;
 
 public class AdvantagePlayerTwo implements TennisScore {
 
@@ -8,7 +11,7 @@ public class AdvantagePlayerTwo implements TennisScore {
 
     @Override
     public TennisScore playerTwoScores() {
-        return new Victory("Player 2");
+        return Victory.forPlayerTwo();
     }
 
     @Override

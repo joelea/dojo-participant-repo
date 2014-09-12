@@ -1,3 +1,4 @@
+package tennis.game;
 public interface TennisScore {
     TennisScore playerOneScores();
 

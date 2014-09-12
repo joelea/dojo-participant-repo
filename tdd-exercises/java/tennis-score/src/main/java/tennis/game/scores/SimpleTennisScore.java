@@ -1,3 +1,6 @@
+package tennis.game.scores;
+
+import tennis.game.TennisScore;
 
 public class SimpleTennisScore implements TennisScore {
     public int playerOne;
@@ -17,7 +20,7 @@ public class SimpleTennisScore implements TennisScore {
         }
         
         if(hasWon(newPlayerOne)) {
-            return new Victory("Player 1");
+            return Victory.forPlayerOne();
         }
 
         return new SimpleTennisScore(newPlayerOne, playerTwo);
@@ -32,7 +35,7 @@ public class SimpleTennisScore implements TennisScore {
         }
         
         if(hasWon(newPlayerTwo)) {
-            return new Victory("Player 2");
+            return Victory.forPlayerTwo();
         }
 
         return new SimpleTennisScore(playerOne, newPlayerTwo);
