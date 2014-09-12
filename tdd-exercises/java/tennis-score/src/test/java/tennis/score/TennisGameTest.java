@@ -1,7 +1,10 @@
+package tennis.score;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
+
+import tennis.game.TennisGame;
 
 
 public class TennisGameTest {
@@ -87,5 +90,24 @@ public class TennisGameTest {
         game.playerOneScores();
 
         assertThat(game.score(), equalTo("Advantage Player One"));
+    }
+
+    @Test public void
+    when_player_one_has_advantage_and_scores_he_wins() {
+        TennisGame game = new TennisGame();
+
+        game.playerOneScores();
+        game.playerOneScores();
+        game.playerOneScores();
+        
+        game.playerTwoScores();
+        game.playerTwoScores();
+        game.playerTwoScores();
+        
+        game.playerOneScores();
+
+        game.playerOneScores();
+
+        assertThat(game.score(), equalTo("Player 1 won"));
     }
 }
