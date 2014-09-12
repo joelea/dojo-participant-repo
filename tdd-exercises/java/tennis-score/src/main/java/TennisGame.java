@@ -10,6 +10,10 @@ public class TennisGame {
             return "Love all";
         }
         
+        if(playerOne == 4) {
+            return "Player 1 won";
+        }
+        
         return scoreAsString(playerOne) + "-" + scoreAsString(playerTwo);
     }
 
