@@ -10,28 +10,44 @@ public class SimpleTennisScore implements TennisScore {
 
     @Override
     public TennisScore playerOneScores() {
-        if(playerOne + 1 == 3 && playerTwo == 3) {
+        int newPlayerOne = playerOne + 1;
+
+        if(isDeuce(newPlayerOne, playerTwo)) {
             return new Deuce();
         }
+        
+        if(hasWon(newPlayerOne)) {
+            return new Victory("Player 1");
+        }
 
-        return new SimpleTennisScore(playerOne + 1, playerTwo);
+        return new SimpleTennisScore(newPlayerOne, playerTwo);
+    }
+
+    private boolean isDeuce(int left, int right) {
+        return left == 3 && right == 3;
+    }
+
+    private boolean hasWon(int points) {
+        return points == 4;
     }
 
     @Override
     public TennisScore playerTwoScores() {
-        if(playerOne == 3 && playerTwo + 1 == 3) {
+        int newPlayerTwo = playerTwo + 1;
+
+        if(isDeuce(playerOne, newPlayerTwo)) {
             return new Deuce();
         }
+        
+        if(hasWon(newPlayerTwo)) {
+            return new Victory("Player 2");
+        }
 
-        return new SimpleTennisScore(playerOne, playerTwo + 1);
+        return new SimpleTennisScore(playerOne, newPlayerTwo);
     }
     
     @Override
     public String getDisplayString() {
-        if(playerOne == 3 && playerTwo == 3) {
-            return "Deuce";
-        }
-
         if(playerOne == 4) {
             return "Player 1 won";
         }
@@ -40,10 +56,12 @@ public class SimpleTennisScore implements TennisScore {
     }
 
     private String scoreAsString(int score) {
-        if(score == 0) {
-            return "Love";
+        switch(score) {
+        case 0: return "Love";
+        case 1: return "15";
+        case 2: return "30";
+        case 3: return "40";
+        default: throw new IllegalArgumentException(String.valueOf(score) + " is not a valid score");
         }
-        
-        return "15";
     }
 }

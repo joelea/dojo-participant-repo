@@ -46,6 +46,18 @@ public class TennisGameTest {
     }
 
     @Test public void
+    when_player_two_scores_4_times_the_game_is_won_by_them() {
+        TennisGame game = new TennisGame();
+
+        game.playerTwoScores();
+        game.playerTwoScores();
+        game.playerTwoScores();
+        game.playerTwoScores();
+
+        assertThat(game.score(), equalTo("Player 2 won"));
+    }
+
+    @Test public void
     when_both_players_score_3_times_the_score_is_deuce() {
         TennisGame game = new TennisGame();
 
