@@ -59,4 +59,21 @@ public class TennisGameTest {
 
         assertThat(game.score(), equalTo("Deuce"));
     }
+
+    @Test public void
+    when_there_is_deuce_and_a_player_scores_that_player_has_advantage() {
+        TennisGame game = new TennisGame();
+
+        game.playerOneScores();
+        game.playerOneScores();
+        game.playerOneScores();
+        
+        game.playerTwoScores();
+        game.playerTwoScores();
+        game.playerTwoScores();
+        
+        game.playerOneScores();
+
+        assertThat(game.score(), equalTo("Advantage Player One"));
+    }
 }
