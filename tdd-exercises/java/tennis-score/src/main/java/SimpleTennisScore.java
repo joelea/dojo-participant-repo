@@ -8,19 +8,22 @@ public class SimpleTennisScore implements TennisScore {
         this.playerTwo = playerTwo;
     }
 
+    @Override
     public SimpleTennisScore playerOneScores() {
         return new SimpleTennisScore(playerOne + 1, playerTwo);
     }
 
+    @Override
     public SimpleTennisScore playerTwoScores() {
         return new SimpleTennisScore(playerOne, playerTwo + 1);
     }
     
+    @Override
     public String getDisplayString() {
-        if(playerOne == 0 && playerTwo == 0) {
-            return "Love all";
+        if(playerOne == 3 && playerTwo == 3) {
+            return "Deuce";
         }
-        
+
         if(playerOne == 4) {
             return "Player 1 won";
         }
