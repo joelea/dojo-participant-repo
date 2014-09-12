@@ -23,14 +23,6 @@ public class SimpleTennisScore implements TennisScore {
         return new SimpleTennisScore(newPlayerOne, playerTwo);
     }
 
-    private boolean isDeuce(int left, int right) {
-        return left == 3 && right == 3;
-    }
-
-    private boolean hasWon(int points) {
-        return points == 4;
-    }
-
     @Override
     public TennisScore playerTwoScores() {
         int newPlayerTwo = playerTwo + 1;
@@ -48,10 +40,6 @@ public class SimpleTennisScore implements TennisScore {
     
     @Override
     public String getDisplayString() {
-        if(playerOne == 4) {
-            return "Player 1 won";
-        }
-        
         return scoreAsString(playerOne) + "-" + scoreAsString(playerTwo);
     }
 
@@ -64,4 +52,13 @@ public class SimpleTennisScore implements TennisScore {
         default: throw new IllegalArgumentException(String.valueOf(score) + " is not a valid score");
         }
     }
+
+    private boolean isDeuce(int left, int right) {
+        return left == 3 && right == 3;
+    }
+
+    private boolean hasWon(int points) {
+        return points == 4;
+    }
+
 }
