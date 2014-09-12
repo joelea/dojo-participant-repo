@@ -2,27 +2,26 @@
 
 public class TennisGame {
 
-    private int playerOne = 0;
-    private int playerTwo = 0;
+    private TennisScore score = new TennisScore(0, 0);
 
     public String score() {
-        if(playerOne == 0 && playerTwo == 0) {
+        if(score.playerOne == 0 && score.playerTwo == 0) {
             return "Love all";
         }
         
-        if(playerOne == 4) {
+        if(score.playerOne == 4) {
             return "Player 1 won";
         }
         
-        return scoreAsString(playerOne) + "-" + scoreAsString(playerTwo);
+        return scoreAsString(score.playerOne) + "-" + scoreAsString(score.playerTwo);
     }
 
     public void playerOneScores() {
-        playerOne += 1;
+        score = score.playerOneScores();
     }
 
     public void playerTwoScores() {
-        playerTwo += 1;
+        score = score.playerTwoScores();
     }
 
     private String scoreAsString(int score) {
