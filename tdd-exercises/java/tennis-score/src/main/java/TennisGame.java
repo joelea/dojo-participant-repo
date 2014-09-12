@@ -10,11 +10,7 @@ public class TennisGame {
             return "Love all";
         }
         
-        if(playerOne == 0) {
-            return "Love-15";
-        }
-        
-        return "15-Love";
+        return scoreAsString(playerOne) + "-" + scoreAsString(playerTwo);
     }
 
     public void playerOneScores() {
@@ -25,4 +21,11 @@ public class TennisGame {
         playerTwo += 1;
     }
 
+    private String scoreAsString(int score) {
+        if(score == 0) {
+            return "Love";
+        }
+        
+        return "15";
+    }
 }
