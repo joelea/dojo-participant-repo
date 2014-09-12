@@ -5,15 +5,7 @@ public class TennisGame {
     private TennisScore score = new TennisScore(0, 0);
 
     public String score() {
-        if(score.playerOne == 0 && score.playerTwo == 0) {
-            return "Love all";
-        }
-        
-        if(score.playerOne == 4) {
-            return "Player 1 won";
-        }
-        
-        return scoreAsString(score.playerOne) + "-" + scoreAsString(score.playerTwo);
+        return score.getDisplayString();
     }
 
     public void playerOneScores() {

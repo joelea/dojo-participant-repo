@@ -15,4 +15,24 @@ public class TennisScore {
     public TennisScore playerTwoScores() {
         return new TennisScore(playerOne, playerTwo + 1);
     }
+    
+    public String getDisplayString() {
+        if(playerOne == 0 && playerTwo == 0) {
+            return "Love all";
+        }
+        
+        if(playerOne == 4) {
+            return "Player 1 won";
+        }
+        
+        return scoreAsString(playerOne) + "-" + scoreAsString(playerTwo);
+    }
+
+    private String scoreAsString(int score) {
+        if(score == 0) {
+            return "Love";
+        }
+        
+        return "15";
+    }
 }
