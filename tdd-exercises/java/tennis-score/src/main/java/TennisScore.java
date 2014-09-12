@@ -1,5 +1,5 @@
 
-public class TennisScore {
+public class TennisScore implements ITennisScore {
     public int playerOne;
     public int playerTwo;
 
