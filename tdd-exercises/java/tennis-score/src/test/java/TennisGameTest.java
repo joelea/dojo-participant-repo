@@ -24,4 +24,12 @@ public class TennisGameTest {
         game.playerTwoScores();
         assertThat(game.score(), equalTo("Love-15"));
     }
+    
+    @Test public void
+    when_players_one_and_two_both_score_once_the_score_is_15_all() {
+        TennisGame game = new TennisGame();
+        game.playerOneScores();
+        game.playerTwoScores();
+        assertThat(game.score(), equalTo("15-15"));
+    }
 }
