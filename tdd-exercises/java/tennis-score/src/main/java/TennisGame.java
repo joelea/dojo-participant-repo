@@ -15,12 +15,4 @@ public class TennisGame {
     public void playerTwoScores() {
         score = score.playerTwoScores();
     }
-
-    private String scoreAsString(int score) {
-        if(score == 0) {
-            return "Love";
-        }
-        
-        return "15";
-    }
 }
