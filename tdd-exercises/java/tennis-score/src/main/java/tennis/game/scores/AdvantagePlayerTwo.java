@@ -16,8 +16,7 @@ public class AdvantagePlayerTwo implements TennisScore {
 
     @Override
     public String getDisplayString() {
-        // TODO Auto-generated method stub
-        return null;
+        return "Advantage Player 2";
     }
 
 }
