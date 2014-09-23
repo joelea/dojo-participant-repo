@@ -1,8 +1,3 @@
-describe 'my test', ->
-
-  it 'should be awesome', ->
-    expect(true).to.be.true
-
-describe '#add3', ->
-  it 'should add 3 to a number', ->
-    expect(add3(2)).to.equal 5
+describe 'String calculator', ->
+  it 'should give 0 when asked to sum no numbers', ->
+    expect(add("")).to.equal 0

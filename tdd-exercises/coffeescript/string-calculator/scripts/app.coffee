@@ -1,1 +1,1 @@
-window.add3 = (n) -> n + 3
+window.add = (numbers) -> 0
