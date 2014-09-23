@@ -24,3 +24,6 @@ local.properties
 .texlipse
 .classpath
 .project
+# js
+**/bower_components/*
+**/node_modules/*
