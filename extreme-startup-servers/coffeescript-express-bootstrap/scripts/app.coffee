@@ -1,0 +1,1 @@
+exports.responseFor = (query) -> "query: #{query}"
