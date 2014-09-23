@@ -62,9 +62,7 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            dist: ['.tmp', '<%= yeoman.dist %>/*'],
-            server: '.tmp',
-            test: ['.tmp/scripts', 'test/.tmp/spec']
+          test: ['.tmp']
         },
         mocha: {
             all: {
@@ -85,6 +83,17 @@ module.exports = function (grunt) {
                     ext: '.js'
                 }]
             },
+        },
+        copy: {
+          test: {
+            files: [{
+              expand: true,
+              cwd: 'specs',
+              src: ['*'],
+              dest: '.tmp/',
+              filter: 'isFile'},
+            ]
+          }
         }
     })
 
@@ -93,12 +102,13 @@ module.exports = function (grunt) {
         var testTasks = [
                 'clean:test',
                 'coffee',
+                'copy:test',
                 'connect:test',
                 'mocha',
-		'open:test',
-		'watch'
+		            'open:test',
+                'watch'
             ];
-            
+
         if(!isConnected) {
             return grunt.task.run(testTasks);
         } else {
