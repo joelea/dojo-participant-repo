@@ -5,13 +5,20 @@ import org.junit.Test;
 
 import tell.dont.ask.EmailService;
 import tell.dont.ask.Patient;
+import tell.dont.ask.TextMessageService;
 
 
 public class PatientReminderTest {
     private static final String EMAIL_ADDRESS = "an@email.address";
+    private static final String PHONE_NUMBER = "07950518195";
+
     private final Patient emailPatient = new Patient();
+    private final Patient phonePatient = new Patient();
+
     private final EmailService emailService = mock(EmailService.class);
-    private final PatientReminder reminder = new PatientReminder(emailService);
+    private final TextMessageService phoneService = mock(TextMessageService.class);
+
+    private final PatientReminder reminder = new PatientReminder(emailService, phoneService);
 
     @Test public void
     a_patient_with_an_email_address_receives_an_email() {
@@ -19,6 +26,13 @@ public class PatientReminderTest {
 
         reminder.remind(emailPatient);
         verify(emailService).emailReminderTo(EMAIL_ADDRESS);
+    }
 
+    @Test public void
+    a_patient_with_a_phone_number_receives_a_text_message() {
+        phonePatient.setPhoneNumber(PHONE_NUMBER);
+
+        reminder.remind(phonePatient);
+        verify(phoneService).sendTextReminderTo(PHONE_NUMBER);
     }
 }
