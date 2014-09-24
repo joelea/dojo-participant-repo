@@ -9,5 +9,5 @@ app.get '/', (req, res) ->
   res.end answer
 
 
-server = app.listen 3000, ->
+server = app.listen 1337, ->
   console.log 'Listening on port %d', server.address().port
