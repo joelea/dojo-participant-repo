@@ -1,3 +1,3 @@
-describe 'String calculator', ->
-  it 'should give 0 when asked to sum no numbers', ->
-    expect(add("")).to.equal 0
+describe 'Startup Server', ->
+  it 'should return an unknown query response when the query is invalid', ->
+    expect(responseFor("blooga blagah")).to.equal "Unknown Query blooga blagah"
