@@ -28,7 +28,9 @@ public class PatientReminder {
     }
 
     private boolean isValidPhoneNumber(String phoneNumber) {
-        return phoneNumber != null && phoneNumber.length() == 11;
+        return phoneNumber != null 
+            && phoneNumber.length() == 11
+            && phoneNumber.startsWith("07");
     }
 
 }

@@ -61,4 +61,13 @@ public class PatientReminderTest {
         reminder.remind(invalidPatient);
         verify(phoneService, never()).sendTextReminderTo(Mockito.anyString());
     }
+
+    @Test public void
+    a_patient_with_a_home_phone_number_is_not_texted() {
+        Patient homePhonePatient = new Patient();
+        String homePhone = "01254987654";
+        homePhonePatient.setPhoneNumber(homePhone);
+        reminder.remind(homePhonePatient);
+        verify(phoneService, never()).sendTextReminderTo(Mockito.anyString());
+    }
 }
