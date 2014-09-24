@@ -22,9 +22,13 @@ public class PatientReminder {
         
         String phoneNumber = patient.getPhoneNumber();
 
-        if(phoneNumber != null) {
+        if(isValidPhoneNumber(phoneNumber)) {
             phoneService.sendTextReminderTo(phoneNumber);
         }
+    }
+
+    private boolean isValidPhoneNumber(String phoneNumber) {
+        return phoneNumber != null && phoneNumber.length() == 11;
     }
 
 }
