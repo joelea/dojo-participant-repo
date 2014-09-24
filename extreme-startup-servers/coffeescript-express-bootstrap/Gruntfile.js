@@ -27,6 +27,8 @@ module.exports = function (grunt) {
         express: {
             dev: {
                 options: {
+                    stdio: 'inherit',
+                    background: false,
                     script: '.tmp/scripts/server.js'
                 }
             }
@@ -112,7 +114,6 @@ module.exports = function (grunt) {
                 'coffee',
                 'copy',
                 'express:dev',
-                'watch:express'
             ];
         return grunt.task.run(testTasks);
     });
