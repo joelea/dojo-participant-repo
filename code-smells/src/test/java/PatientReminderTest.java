@@ -2,6 +2,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -21,27 +22,27 @@ public class PatientReminderTest {
     private final TextMessageService phoneService = mock(TextMessageService.class);
 
     private final PatientReminder reminder = new PatientReminder(emailService, phoneService);
+    
+    @Before public void
+    setup() {
+        phonePatient.setPhoneNumber(PHONE_NUMBER);
+        emailPatient.setEmailAddress(EMAIL_ADDRESS);
+    }
 
     @Test public void
     a_patient_with_an_email_address_receives_an_email() {
-        emailPatient.setEmailAddress(EMAIL_ADDRESS);
-
         reminder.remind(emailPatient);
         verify(emailService).emailReminderTo(EMAIL_ADDRESS);
     }
 
     @Test public void
     a_patient_with_a_phone_number_receives_a_text_message() {
-        phonePatient.setPhoneNumber(PHONE_NUMBER);
-
         reminder.remind(phonePatient);
         verify(phoneService).sendTextReminderTo(PHONE_NUMBER);
     }
 
     @Test public void
     a_patient_with_no_email_address_does_not_get_an_email() {
-        phonePatient.setPhoneNumber(PHONE_NUMBER);
-
         reminder.remind(phonePatient);
         verify(emailService, never()).emailReminderTo(Mockito.anyString());
     }
