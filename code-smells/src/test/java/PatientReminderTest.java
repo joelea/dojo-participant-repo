@@ -1,7 +1,9 @@
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import tell.dont.ask.EmailService;
 import tell.dont.ask.Patient;
@@ -34,5 +36,13 @@ public class PatientReminderTest {
 
         reminder.remind(phonePatient);
         verify(phoneService).sendTextReminderTo(PHONE_NUMBER);
+    }
+
+    @Test public void
+    a_patient_with_no_email_address_does_not_get_an_email() {
+        phonePatient.setPhoneNumber(PHONE_NUMBER);
+
+        reminder.remind(phonePatient);
+        verify(emailService, never()).emailReminderTo(Mockito.anyString());
     }
 }
