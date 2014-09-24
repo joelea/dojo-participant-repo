@@ -23,14 +23,21 @@ public class PatientReminder {
         String phoneNumber = patient.getPhoneNumber();
 
         if(isValidPhoneNumber(phoneNumber)) {
-            phoneService.sendTextReminderTo(phoneNumber);
+            if(isMobileNumber(phoneNumber)) {
+                phoneService.sendTextReminderTo(phoneNumber);
+            } else {
+                phoneService.callWithReminder(phoneNumber);
+            }
         }
+    }
+
+    private boolean isMobileNumber(String phoneNumber) {
+        return phoneNumber.startsWith("07");
     }
 
     private boolean isValidPhoneNumber(String phoneNumber) {
         return phoneNumber != null 
-            && phoneNumber.length() == 11
-            && phoneNumber.startsWith("07");
+            && phoneNumber.length() == 11;
     }
 
 }
