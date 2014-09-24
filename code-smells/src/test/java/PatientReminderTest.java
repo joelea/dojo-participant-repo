@@ -46,4 +46,10 @@ public class PatientReminderTest {
         reminder.remind(phonePatient);
         verify(emailService, never()).emailReminderTo(Mockito.anyString());
     }
+
+    @Test public void
+    a_patient_with_no_phone_number_does_not_receive_a_text() {
+        reminder.remind(emailPatient);
+        verify(phoneService, never()).sendTextReminderTo(Mockito.anyString());
+    }
 }

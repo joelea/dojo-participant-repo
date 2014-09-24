@@ -19,8 +19,12 @@ public class PatientReminder {
         if(emailAddress != null) {
             emailService.emailReminderTo(emailAddress);
         }
+        
+        String phoneNumber = patient.getPhoneNumber();
 
-        phoneService.sendTextReminderTo(patient.getPhoneNumber());
+        if(phoneNumber != null) {
+            phoneService.sendTextReminderTo(phoneNumber);
+        }
     }
 
 }
