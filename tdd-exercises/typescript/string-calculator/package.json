@@ -1,0 +1,14 @@
+{
+  "name": "string-calculator",
+  "version": "0.0.0",
+  "dependencies": {
+    "lodash": "*",
+    "mocha": "*",
+    "chai": "*",
+    "webpack": "*",
+    "webpack-dev-server": "*",
+    "typescript": "*",
+    "ts-loader": "*",
+    "on-build-webpack": "*"
+  }
+}
