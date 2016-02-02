@@ -5,8 +5,8 @@ import * as chai from 'chai'
 
 const {expect} = chai;
 
-describe('a test', () => {
-    it('should work', () => {
+describe('String calculator', () => {
+    it('should give 0 when asked to sum no numbers', () => {
         expect(stringCalculator('')).to.equal(0)
     });
 });
