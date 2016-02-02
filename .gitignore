@@ -32,3 +32,5 @@ local.properties
 *.iml
 *.iws
 out/
+.idea/
+build/
