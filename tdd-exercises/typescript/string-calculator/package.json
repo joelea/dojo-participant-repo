@@ -6,9 +6,10 @@
     "mocha": "*",
     "chai": "*",
     "webpack": "*",
-    "webpack-dev-server": "*",
     "typescript": "*",
-    "ts-loader": "*",
-    "on-build-webpack": "*"
+    "ts-loader": "*"
+  },
+  "scripts": {
+    "shrinkwrap": "npm shrinkwrap --dev && node ./tasks/shrinkwrap-remove-resolved.js"
   }
 }

@@ -1,5 +1,4 @@
 var child_process = require('child_process');
-var WebpackOnBuildPlugin = require('on-build-webpack');
 var _ = require('lodash');
 
 var outputDir = __dirname + '/build';
