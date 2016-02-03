@@ -1,0 +1,15 @@
+{
+  "name": "string-calculator",
+  "version": "0.0.0",
+  "dependencies": {
+    "lodash": "*",
+    "mocha": "*",
+    "chai": "*",
+    "webpack": "*",
+    "typescript": "*",
+    "ts-loader": "*"
+  },
+  "scripts": {
+    "shrinkwrap": "npm shrinkwrap --dev && node ./tasks/shrinkwrap-remove-resolved.js"
+  }
+}

@@ -27,3 +27,10 @@ local.properties
 # js
 **/bower_components/*
 **/node_modules/*
+
+*.ipr
+*.iml
+*.iws
+out/
+.idea/
+build/
