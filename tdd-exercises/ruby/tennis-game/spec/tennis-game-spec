@@ -1,0 +1,18 @@
+require 'rubygems'
+require 'bundler/setup'
+
+require 'rspec'
+
+require_relative '../main/tennis-game'
+
+describe TennisGame do
+
+  before :each do
+    @game = TennisGame.new()
+  end
+
+  it "has a score of Love All when no one has score" do
+    expect(@game.score()).to eq "Love All"
+  end
+
+end
