@@ -1,0 +1,33 @@
+allprojects {
+  apply plugin: 'java'
+  apply plugin: 'idea'
+}
+
+subprojects {
+  apply plugin: 'eclipse'
+
+  repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+      url 'https://palantir.bintray.com/releases/'
+    }
+  }
+
+  dependencies {
+    compile 'com.google.guava:guava:17.0'
+    compile 'com.amazonaws:aws-java-sdk-s3:1.10.69'
+
+    testCompile 'org.hamcrest:hamcrest-all:1.3'
+    testCompile 'junit:junit:4.8.2'
+    testCompile 'org.mockito:mockito-all:1.9.5'
+    testCompile 'com.palantir.docker.compose:docker-compose-rule:0.5.2'
+  }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.8'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8

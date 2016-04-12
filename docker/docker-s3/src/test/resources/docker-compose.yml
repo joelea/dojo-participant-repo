@@ -1,0 +1,4 @@
+s3:
+  image: "docker.palantir.build/magritte/magritte-ete/fake-s3:0.1"
+  ports:
+    - "443:443"
