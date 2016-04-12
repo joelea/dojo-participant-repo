@@ -14,12 +14,17 @@ end
 describe BankAccount do
 
   before :each do
-    @account = BankAccount.new()
     @clock = double("clock")
     @printer = double("printer")
+    @account = BankAccount.new(@printer)
   end
 
   it "Allow printing of a statement in reverse chronological order" do
+    expect(@printer).to receive(:print_line).with("DATE | AMOUNT | BALANCE").ordered
+    expect(@printer).to receive(:print_line).with("01/05/2014 | 500 | 1400").ordered
+    expect(@printer).to receive(:print_line).with("02/03/2014 | -100 | 900").ordered
+    expect(@printer).to receive(:print_line).with("01/04/2014 | 1000 | 1000").ordered
+
     set_today("01/04/2014")
     @account.deposit(1000)
 
@@ -30,11 +35,6 @@ describe BankAccount do
     @account.deposit(500)
     
     @account.print_statement()
-
-    expect(@printer).to receive(:print_line).with("DATE | AMOUNT | BALANCE").ordered
-    expect(@printer).to receive(:print_line).with("01/05/2014 | 500 | 1400").ordered
-    expect(@printer).to receive(:print_line).with("02/03/2014 | -100 | 900").ordered
-    expect(@printer).to receive(:print_line).with("01/04/2014 | 1000 | 1000").ordered
   end
 
 end
