@@ -5,6 +5,8 @@ require 'rspec/mocks'
 require 'rspec'
 
 require_relative '../main/bank-account'
+require_relative '../main/acceptance/clock'
+require_relative '../main/acceptance/printer'
 
 def set_today(today)
 end
