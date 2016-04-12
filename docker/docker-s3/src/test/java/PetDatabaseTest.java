@@ -1,6 +1,5 @@
 import java.io.IOException;
 
-import org.junit.Before;
 import org.junit.ClassRule;
 
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -11,10 +10,10 @@ import com.palantir.docker.compose.connection.DockerPort;
 public class PetDatabaseTest {
 
 	private final DockerComposition dockerComposition = DockerComposition.of(
-			"src/test/resources/docker-compose.yml").build();
+			"docker-s3/src/test/resources/docker-compose.yml").build();
 
 	@ClassRule
-	public final TrustEveryoneContext ignoreSSLCerts = new TrustEveryoneContext();
+	public static final TrustEveryoneContext ignoreSSLCerts = new TrustEveryoneContext();
 
 	private AmazonS3Client createS3Client() {
 		try {
