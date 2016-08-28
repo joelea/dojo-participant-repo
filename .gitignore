@@ -27,6 +27,7 @@ local.properties
 # js
 **/bower_components/*
 **/node_modules/*
+npm-debug.log
 
 *.ipr
 *.iml
