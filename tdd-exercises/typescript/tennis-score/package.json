@@ -2,14 +2,17 @@
   "name": "tennis-score",
   "version": "0.0.0",
   "dependencies": {
-    "lodash": "*",
-    "mocha": "*",
-    "chai": "*",
-    "webpack": "*",
-    "typescript": "*",
-    "ts-loader": "*"
+    "@types/chai": "^3.4.32",
+    "@types/lodash": "^4.14.34",
+    "@types/mocha": "^2.2.31",
+    "chai": "^3.5.0",
+    "lodash": "^4.15.0",
+    "mocha": "^3.0.2",
+    "ts-loader": "^0.8.2",
+    "typescript": "^2.0.0",
+    "webpack": "^1.13.2"
   },
   "scripts": {
-    "shrinkwrap": "npm shrinkwrap --dev && node ./tasks/shrinkwrap-remove-resolved.js"
+    "test": "webpack --watch"
   }
 }

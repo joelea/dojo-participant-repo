@@ -1,10 +1,8 @@
-/// <reference path="../typings/tsd.d.ts" />
-
-import { TennisGame } from './tennis-score.ts'
-import * as chai from 'chai'
 import * as _ from 'lodash'
+import * as mocha from 'mocha'
+import {expect} from 'chai'
 
-const {expect} = chai;
+import {TennisGame} from './tennis-score.ts'
 
 describe('Tennis Game', () => {
     let game: TennisGame = null;
