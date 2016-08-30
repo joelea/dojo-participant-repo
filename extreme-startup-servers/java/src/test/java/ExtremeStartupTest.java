@@ -5,15 +5,10 @@ import org.junit.Test;
 
 public class ExtremeStartupTest {
 
-    private final ExtremeStartup server = new ExtremeStartup();
+    private final QuestionAnswerer answerer = new QuestionAnswerer();
 
     @Test
-    public void should_accept_missing_input() {
-        assertThat(server.answer(null), equalTo("team name"));
-    }
-
-    @Test
-    public void should_add_numbers() {
-        assertThat(server.answer("what is the sum of 14 and 4"), equalTo("18"));
+    public void should_return_an_unknown_query_message_when_the_query_is_unrecognized() {
+        assertThat(answerer.answer("Invalid query"), equalTo("Unknown query 'Invalid query'"));
     }
 }
