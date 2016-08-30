@@ -5,7 +5,7 @@ import {expect} from 'chai'
 import {TennisGame} from './tennis-score.ts'
 
 describe('Tennis Game', () => {
-    let game: TennisGame = null;
+    let game: TennisGame;
 
     beforeEach(() => {
         game = new TennisGame();

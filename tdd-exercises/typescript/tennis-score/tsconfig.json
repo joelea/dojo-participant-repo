@@ -3,19 +3,13 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
-    "outDir": "build/src",
-    "rootDir": ".",
-    "removeComments": false,
-    "sourceMap": true,
     "stripInternal": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "target": "es5",
     "typeRoots": ["node_modules/@types"]
   },
   "exclude": [
     "build",
-    "dist",
-    "node_modules",
-    "test"
+    "node_modules"
   ]
 }
