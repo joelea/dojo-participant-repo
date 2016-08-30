@@ -35,3 +35,4 @@ npm-debug.log
 out/
 .idea/
 build/
+npm-debug.log
