@@ -2,7 +2,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-public class ExtremeStartupTest {
+public class QuestionAnswererTest {
 
     private final QuestionAnswerer answerer = new QuestionAnswerer();
 
