@@ -6,6 +6,9 @@ const app = express();
 
 app.get("/", (request: express.Request, response: express.Response) => {
     const query = request.query["q"];
+    console.log("A request has arrived:");
+    console.log(query);
+
     const answer = respondTo(query);
     response.end(answer);
 });
