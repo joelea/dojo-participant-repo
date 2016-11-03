@@ -15,8 +15,10 @@ public class PatientReminder {
 
     public void remind(Patient patient) {
         remindViaEmailIfTheyHaveEmailAddress(patient);
+        remindViaPhoneIfTheyHaveAPhoneNumber(patient);
+    }
 
-        // Text a patient if they have a mobile, otherwise ring them
+    private void remindViaPhoneIfTheyHaveAPhoneNumber(Patient patient) {
         String phoneNumber = patient.getPhoneNumber();
 
         if(isValidPhoneNumber(phoneNumber)) {
