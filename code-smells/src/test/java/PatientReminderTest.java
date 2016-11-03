@@ -11,7 +11,7 @@ import tell.dont.ask.TextMessageService;
 
 
 public class PatientReminderTest {
-    private static final String EMAIL_ADDRESS = "an@email.address";
+    private static final EmailAddress EMAIL_ADDRESS = new EmailAddress("an@email.address");
     private static final PhoneNumber PHONE_NUMBER = new PhoneNumber("07950518195");
 
     private final Patient emailPatient = new Patient();
@@ -31,7 +31,7 @@ public class PatientReminderTest {
     @Test public void
     a_patient_with_an_email_address_receives_an_email() {
         reminder.remind(emailPatient);
-        verify(emailService).emailReminderTo(EMAIL_ADDRESS);
+        verify(emailService).emailReminderTo(EMAIL_ADDRESS.getValue());
     }
 
     @Test public void

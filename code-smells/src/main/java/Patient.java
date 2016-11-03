@@ -1,13 +1,13 @@
 public class Patient {
 
-    private String email;
+    private EmailAddress email;
     private PhoneNumber phoneNumber;
 
-    public void setEmailAddress(String email) {
+    public void setEmailAddress(EmailAddress email) {
         this.email = email;
     }
 
-    public String getEmailAddress() {
+    public EmailAddress getEmailAddress() {
         return email;
     }
 

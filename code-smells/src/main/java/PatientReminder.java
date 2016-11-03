@@ -32,11 +32,11 @@ public class PatientReminder {
     }
 
     private void remindViaEmailIfTheyHaveEmailAddress(Patient patient) {
-        String emailAddress = patient.getEmailAddress();
+        EmailAddress emailAddress = patient.getEmailAddress();
 
         // Email addresses are null when the patient doesn't have one
         if (emailAddress != null) {
-            emailService.emailReminderTo(emailAddress);
+            emailService.emailReminderTo(emailAddress.getValue());
         }
     }
 }
