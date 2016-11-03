@@ -1,5 +1,4 @@
 import tell.dont.ask.EmailService;
-import tell.dont.ask.Patient;
 import tell.dont.ask.TextMessageService;
 
 
@@ -19,14 +18,16 @@ public class PatientReminder {
     }
 
     private void remindViaPhoneIfTheyHaveAPhoneNumber(Patient patient) {
-        String phoneNumber = patient.getPhoneNumber();
+        PhoneNumber phoneNumber = patient.getPhoneNumber();
 
-        if (isValidPhoneNumber(phoneNumber)) {
-            if(isMobileNumber(phoneNumber)) {
-                phoneService.sendTextReminderTo(phoneNumber);
-            } else {
-                phoneService.callWithReminder(phoneNumber);
-            }
+        if (phoneNumber == null) {
+            return;
+        }
+
+        if(phoneNumber.isMobileNumber()) {
+            phoneService.sendTextReminderTo(phoneNumber.getValue());
+        } else {
+            phoneService.callWithReminder(phoneNumber.getValue());
         }
     }
 
@@ -38,14 +39,4 @@ public class PatientReminder {
             emailService.emailReminderTo(emailAddress);
         }
     }
-
-    private boolean isMobileNumber(String phoneNumber) {
-        return phoneNumber.startsWith("07");
-    }
-
-    private boolean isValidPhoneNumber(String phoneNumber) {
-        // Phone numbers are null when the patient doesn't have one
-        return phoneNumber != null && phoneNumber.length() == 11;
-    }
-
 }
