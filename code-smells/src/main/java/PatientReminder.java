@@ -21,7 +21,7 @@ public class PatientReminder {
     private void remindViaPhoneIfTheyHaveAPhoneNumber(Patient patient) {
         String phoneNumber = patient.getPhoneNumber();
 
-        if(isValidPhoneNumber(phoneNumber)) {
+        if (isValidPhoneNumber(phoneNumber)) {
             if(isMobileNumber(phoneNumber)) {
                 phoneService.sendTextReminderTo(phoneNumber);
             } else {
@@ -34,7 +34,7 @@ public class PatientReminder {
         String emailAddress = patient.getEmailAddress();
 
         // Email addresses are null when the patient doesn't have one
-        if(emailAddress != null) {
+        if (emailAddress != null) {
             emailService.emailReminderTo(emailAddress);
         }
     }
@@ -44,9 +44,8 @@ public class PatientReminder {
     }
 
     private boolean isValidPhoneNumber(String phoneNumber) {
-        // Phone numbers are null when teh patient doesn't have one
-        return phoneNumber != null
-            && phoneNumber.length() == 11;
+        // Phone numbers are null when the patient doesn't have one
+        return phoneNumber != null && phoneNumber.length() == 11;
     }
 
 }
