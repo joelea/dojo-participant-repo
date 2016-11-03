@@ -2,6 +2,7 @@ import com.google.common.base.Preconditions;
 
 public class PhoneNumber {
     private static final int UK_PHONE_NUMBER_LENGTH = 11;
+    public static final String UK_PHONE_NUMBER_PREFIX = "07";
 
     private final String value;
 
@@ -15,7 +16,7 @@ public class PhoneNumber {
     }
 
     public boolean isMobileNumber() {
-        return value.startsWith("07");
+        return value.startsWith(UK_PHONE_NUMBER_PREFIX);
     }
 
     public String getValue() {
