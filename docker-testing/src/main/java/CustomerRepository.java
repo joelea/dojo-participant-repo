@@ -30,6 +30,7 @@ import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 
 public interface CustomerRepository {
     static CustomerRepository createDefault() {
@@ -41,14 +42,15 @@ public interface CustomerRepository {
         }
     }
 
-    @SqlUpdate("create table something (id int primary key, name varchar(100))")
+    @SqlUpdate("create table customers (id int primary key, name varchar(100), phonenumber varchar(15))")
     void createSomethingTable();
 
-    @SqlUpdate("insert into something (id, name) values (:id, :name)")
-    void insert(@Bind("id") int id, @Bind("name") String name);
+    @SqlUpdate("insert into customers (id, name, phonenumber) values (:id, :name, :phonenumber)")
+    void insert(@Bind("id") int id, @Bind("name") String name, @Bind("phonenumber") String phoneNumber);
 
-    @SqlQuery("select name from something where id = :id")
-    String findNameById(@Bind("id") int id);
+    @SqlQuery("select * from customers where id = :id")
+    @Mapper(CustomerMapper.class)
+    Customer loadCustomer(@Bind("id") int id);
 
     /**
      * close with no args is used to close the connection

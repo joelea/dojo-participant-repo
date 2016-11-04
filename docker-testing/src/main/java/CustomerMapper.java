@@ -26,35 +26,15 @@
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import com.palantir.docker.compose.DockerComposeRule;
-import com.palantir.docker.compose.logging.LogDirectory;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.skife.jdbi.v2.StatementContext;
+import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
-import static com.palantir.docker.compose.configuration.ShutdownStrategy.AGGRESSIVE;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class RealCustomerRepositoryShould {
-    private static final Customer AARON = new Customer(2, "Aaron", "07950765421");
-    @ClassRule
-    public static DockerComposeRule docker = DockerComposeRule.builder()
-            .file("docker-compose.yml")
-            .saveLogsTo(LogDirectory.circleAwareLogDirectory(RealCustomerRepositoryShould.class))
-            .shutdownStrategy(AGGRESSIVE)
-            .build();
-
-    @Test public void
-    load_customers_after_storing_them() {
-        CustomerRepository repo = CustomerRepository.createDefault();
-        repo.createSomethingTable();
-
-        repo.insert(AARON.getId(), AARON.getName(), AARON.getPhoneNumber());
-
-        Customer customer = repo.loadCustomer(2);
-
-        assertThat(customer, equalTo(AARON));
-
-        repo.close();
+public class CustomerMapper implements ResultSetMapper<Customer> {
+    @Override
+    public Customer map(int index, ResultSet r, StatementContext ctx) throws SQLException {
+        return new Customer(r.getInt("id"), r.getString("name"), r.getString("phonenumber"));
     }
 }

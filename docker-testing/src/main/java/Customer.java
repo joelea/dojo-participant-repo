@@ -26,35 +26,47 @@
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import com.palantir.docker.compose.DockerComposeRule;
-import com.palantir.docker.compose.logging.LogDirectory;
-import org.junit.ClassRule;
-import org.junit.Test;
+public class Customer {
+    private final int id;
+    private final String name;
+    private final String phoneNumber;
 
-import static com.palantir.docker.compose.configuration.ShutdownStrategy.AGGRESSIVE;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+    public Customer(int id, String name, String phoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
 
-public class RealCustomerRepositoryShould {
-    private static final Customer AARON = new Customer(2, "Aaron", "07950765421");
-    @ClassRule
-    public static DockerComposeRule docker = DockerComposeRule.builder()
-            .file("docker-compose.yml")
-            .saveLogsTo(LogDirectory.circleAwareLogDirectory(RealCustomerRepositoryShould.class))
-            .shutdownStrategy(AGGRESSIVE)
-            .build();
+    public String getName() {
+        return name;
+    }
 
-    @Test public void
-    load_customers_after_storing_them() {
-        CustomerRepository repo = CustomerRepository.createDefault();
-        repo.createSomethingTable();
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-        repo.insert(AARON.getId(), AARON.getName(), AARON.getPhoneNumber());
+    public int getId() {
+        return id;
+    }
 
-        Customer customer = repo.loadCustomer(2);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        assertThat(customer, equalTo(AARON));
+        Customer customer = (Customer) o;
 
-        repo.close();
+        if (id != customer.id) return false;
+        if (name != null ? !name.equals(customer.name) : customer.name != null) return false;
+        return !(phoneNumber != null ? !phoneNumber.equals(customer.phoneNumber) : customer.phoneNumber != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        return result;
     }
 }
