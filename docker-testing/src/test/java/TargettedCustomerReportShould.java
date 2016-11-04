@@ -1,4 +1,4 @@
-package can.touch;/*
+/*
  * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
  *
  * THIS SOFTWARE CONTAINS PROPRIETARY AND CONFIDENTIAL INFORMATION OWNED BY PALANTIR TECHNOLOGIES INC.
@@ -26,43 +26,27 @@ package can.touch;/*
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import cannot.touch.DataSourceFactory;
-import cannot.touch.Retrying;
-import org.skife.jdbi.v2.DBI;
-import org.skife.jdbi.v2.sqlobject.Bind;
-import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
-import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
+import can.touch.ContactDetail;
+import can.touch.CustomerRepository;
+import can.touch.TargettedCustomerReport;
+import com.google.common.collect.ImmutableList;
+import org.junit.Test;
 
-import java.util.List;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public interface CustomerRepository {
-    static CustomerRepository createDefault() {
-        DBI dbi = new DBI(DataSourceFactory.create());
-        try {
-            return Retrying.withRetry( () -> dbi.open(CustomerRepository.class));
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+public class TargettedCustomerReportShould {
+    private static final ContactDetail ANNAS_NUMBER = new ContactDetail("12356");
+
+    CustomerRepository repository = mock(CustomerRepository.class);
+    TargettedCustomerReport report = new TargettedCustomerReport(repository);
+
+    @Test public void
+    find_annas_number() {
+        when(repository.getAllContactDetails()).thenReturn(ImmutableList.of(ANNAS_NUMBER));
+
+        assertThat(report.getAllImportantNumbers(), contains(ANNAS_NUMBER.getPhoneNumber()));
     }
-
-    @SqlUpdate("create table customers (id int primary key, name varchar(100), phonenumber varchar(15))")
-    void createCustomerTable();
-
-    @SqlUpdate("create table phonenumbers (phonenumber varchar(15), customer_id int)")
-    void createPhoneNumberTable();
-
-    @SqlUpdate("insert into customers (id, name) values (:id, :name)")
-    void insertCustomer(@Bind("id") int id, @Bind("name") String name);
-
-    @SqlQuery("select * from customers where id = :id")
-    @Mapper(CustomerMapper.class)
-    Customer getCustomer(@Bind("id") int id);
-
-    /**
-     * close with no args is used to close the connection
-     */
-    void close();
-
-    List<ContactDetail> getAllContactDetails();
 }

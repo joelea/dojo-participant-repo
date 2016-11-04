@@ -27,7 +27,7 @@
  */
 
 import can.touch.CustomerRepository;
-import cannot.touch.Customer;
+import can.touch.Customer;
 import com.palantir.docker.compose.DockerComposeRule;
 import com.palantir.docker.compose.logging.LogDirectory;
 import org.junit.ClassRule;
@@ -38,7 +38,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class RealCustomerRepositoryShould {
-    private static final Customer AARON = new Customer(2, "Aaron", "07950765421");
+    private static final Customer AARON = new Customer(2, "Aaron");
     @ClassRule
     public static DockerComposeRule docker = DockerComposeRule.builder()
             .file("docker-compose.yml")
@@ -46,14 +46,16 @@ public class RealCustomerRepositoryShould {
             .shutdownStrategy(AGGRESSIVE)
             .build();
 
+
     @Test public void
     load_customers_after_storing_them() {
         CustomerRepository repo = CustomerRepository.createDefault();
-        repo.createSomethingTable();
+        repo.createCustomerTable();
+        repo.createPhoneNumberTable();
 
-        repo.insert(AARON.getId(), AARON.getName(), AARON.getPhoneNumber());
+        repo.insertCustomer(AARON.getId(), AARON.getName());
 
-        Customer customer = repo.loadCustomer(2);
+        Customer customer = repo.getCustomer(AARON.getId());
 
         assertThat(customer, equalTo(AARON));
 

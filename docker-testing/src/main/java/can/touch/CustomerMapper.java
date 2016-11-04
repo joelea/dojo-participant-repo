@@ -26,43 +26,15 @@ package can.touch;/*
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import cannot.touch.DataSourceFactory;
-import cannot.touch.Retrying;
-import org.skife.jdbi.v2.DBI;
-import org.skife.jdbi.v2.sqlobject.Bind;
-import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
-import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
+import org.skife.jdbi.v2.StatementContext;
+import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
-import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public interface CustomerRepository {
-    static CustomerRepository createDefault() {
-        DBI dbi = new DBI(DataSourceFactory.create());
-        try {
-            return Retrying.withRetry( () -> dbi.open(CustomerRepository.class));
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+public class CustomerMapper implements ResultSetMapper<Customer> {
+    @Override
+    public Customer map(int index, ResultSet r, StatementContext ctx) throws SQLException {
+        return new Customer(r.getInt("id"), r.getString("name"));
     }
-
-    @SqlUpdate("create table customers (id int primary key, name varchar(100), phonenumber varchar(15))")
-    void createCustomerTable();
-
-    @SqlUpdate("create table phonenumbers (phonenumber varchar(15), customer_id int)")
-    void createPhoneNumberTable();
-
-    @SqlUpdate("insert into customers (id, name) values (:id, :name)")
-    void insertCustomer(@Bind("id") int id, @Bind("name") String name);
-
-    @SqlQuery("select * from customers where id = :id")
-    @Mapper(CustomerMapper.class)
-    Customer getCustomer(@Bind("id") int id);
-
-    /**
-     * close with no args is used to close the connection
-     */
-    void close();
-
-    List<ContactDetail> getAllContactDetails();
 }

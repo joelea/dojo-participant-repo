@@ -1,4 +1,4 @@
-package cannot.touch;/*
+/*
  * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
  *
  * THIS SOFTWARE CONTAINS PROPRIETARY AND CONFIDENTIAL INFORMATION OWNED BY PALANTIR TECHNOLOGIES INC.
@@ -25,16 +25,7 @@ package cannot.touch;/*
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package can.touch;
 
-import org.skife.jdbi.v2.StatementContext;
-import org.skife.jdbi.v2.tweak.ResultSetMapper;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-public class CustomerMapper implements ResultSetMapper<Customer> {
-    @Override
-    public Customer map(int index, ResultSet r, StatementContext ctx) throws SQLException {
-        return new Customer(r.getInt("id"), r.getString("name"), r.getString("phonenumber"));
-    }
+public class TargettedCustomerReports {
 }

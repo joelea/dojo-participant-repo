@@ -1,4 +1,4 @@
-package cannot.touch;/*
+package can.touch;/*
  * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
  *
  * THIS SOFTWARE CONTAINS PROPRIETARY AND CONFIDENTIAL INFORMATION OWNED BY PALANTIR TECHNOLOGIES INC.
@@ -29,20 +29,14 @@ package cannot.touch;/*
 public class Customer {
     private final int id;
     private final String name;
-    private final String phoneNumber;
 
-    public Customer(int id, String name, String phoneNumber) {
+    public Customer(int id, String name) {
         this.id = id;
         this.name = name;
-        this.phoneNumber = phoneNumber;
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
     }
 
     public int getId() {
@@ -57,16 +51,14 @@ public class Customer {
         Customer customer = (Customer) o;
 
         if (id != customer.id) return false;
-        if (name != null ? !name.equals(customer.name) : customer.name != null) return false;
-        return !(phoneNumber != null ? !phoneNumber.equals(customer.phoneNumber) : customer.phoneNumber != null);
+        return name.equals(customer.name);
 
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + name.hashCode();
         return result;
     }
 }
