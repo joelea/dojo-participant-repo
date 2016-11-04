@@ -1,4 +1,4 @@
-/*
+package can.touch;/*
  * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
  *
  * THIS SOFTWARE CONTAINS PROPRIETARY AND CONFIDENTIAL INFORMATION OWNED BY PALANTIR TECHNOLOGIES INC.
@@ -26,6 +26,10 @@
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import cannot.touch.Customer;
+import cannot.touch.CustomerMapper;
+import cannot.touch.DataSourceFactory;
+import cannot.touch.Retrying;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;

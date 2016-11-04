@@ -1,4 +1,4 @@
-/*
+package cannot.touch;/*
  * Copyright 2016 Palantir Technologies, Inc. All rights reserved.
  *
  * THIS SOFTWARE CONTAINS PROPRIETARY AND CONFIDENTIAL INFORMATION OWNED BY PALANTIR TECHNOLOGIES INC.
@@ -26,15 +26,47 @@
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.skife.jdbi.v2.StatementContext;
-import org.skife.jdbi.v2.tweak.ResultSetMapper;
+public class Customer {
+    private final int id;
+    private final String name;
+    private final String phoneNumber;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+    public Customer(int id, String name, String phoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
 
-public class CustomerMapper implements ResultSetMapper<Customer> {
+    public String getName() {
+        return name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     @Override
-    public Customer map(int index, ResultSet r, StatementContext ctx) throws SQLException {
-        return new Customer(r.getInt("id"), r.getString("name"), r.getString("phonenumber"));
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Customer customer = (Customer) o;
+
+        if (id != customer.id) return false;
+        if (name != null ? !name.equals(customer.name) : customer.name != null) return false;
+        return !(phoneNumber != null ? !phoneNumber.equals(customer.phoneNumber) : customer.phoneNumber != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        return result;
     }
 }

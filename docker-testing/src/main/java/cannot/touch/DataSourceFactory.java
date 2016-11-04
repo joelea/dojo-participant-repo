@@ -1,3 +1,5 @@
+package cannot.touch;
+
 import org.postgresql.jdbc3.Jdbc3PoolingDataSource;
 
 import javax.sql.DataSource;
