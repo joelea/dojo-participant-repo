@@ -59,10 +59,19 @@ public interface CustomerRepository {
     @Mapper(CustomerMapper.class)
     Customer getCustomer(@Bind("id") int id);
 
+    /*
+    ---- ADD IMPLEMENTATION HERE ----
+    | This method should join the   |
+    | customer table with the       |
+    | contact details table. Use    |
+    | similar annotations to        |
+    | `getCustomer` above.          |
+    ---------------------------------
+    */
+    List<ContactDetail> getAllContactDetails();
+
     /**
      * close with no args is used to close the connection
      */
     void close();
-
-    List<ContactDetail> getAllContactDetails();
 }
