@@ -15,7 +15,7 @@ public class AcceptanceCriteria {
 
     @Ignore
     @Test public void
-    account_should_be_able_to_print_out_a_bank_statement_with_the_transactions_in_reverse_chronological_order() {
+    account_should_be_able_to_print_out_a_bank_statement_with_the_transactions_in_chronological_order() {
         setToday("01/04/2014");
         account.deposit(1000);
 
