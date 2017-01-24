@@ -26,16 +26,17 @@
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import org.junit.Test;
+
+import com.google.common.collect.ImmutableList;
+
 import can.touch.ContactDetail;
 import can.touch.CustomerRepository;
 import can.touch.TargettedCustomerReport;
-import com.google.common.collect.ImmutableList;
-import org.junit.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class TargettedCustomerReportShould {
     private static final ContactDetail ANNAS_NUMBER = new ContactDetail("12356");
@@ -47,6 +48,6 @@ public class TargettedCustomerReportShould {
     find_annas_number() {
         when(repository.getAllContactDetails()).thenReturn(ImmutableList.of(ANNAS_NUMBER));
 
-        assertThat(report.getAllImportantNumbers(), contains(ANNAS_NUMBER.getPhoneNumber()));
+        assertThat(report.getAllImportantNumbers()).contains(ANNAS_NUMBER.getPhoneNumber());
     }
 }
