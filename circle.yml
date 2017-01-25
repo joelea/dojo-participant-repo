@@ -13,7 +13,6 @@ dependencies:
 test:
   override:
     - cd ./code-smells/ && ./gradlew compileJava compileTestJava
-    - cd ./docker/ && ./gradlew compileJava compileTestJava
     - cd ./docker-testing/ && ./gradlew compileJava compileTestJava
     - cd ./extreme-startup-servers/java/ && ./gradlew compileJava compileTestJava
     - cd ./outside-in/java/ && ./gradlew compileJava compileTestJava
