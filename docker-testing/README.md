@@ -1,6 +1,6 @@
 # The Problem
 
-You are building a system for the very supersticious CEO of a drone delivery company, John. Last week John phoned up one of his small customers, Anna, to try and sell her some more drone deliveries. To his amazement Anna increased her order of scheduled drone deliveries by over 9000!
+You are building a system for the very superstitious CEO of a drone delivery company, John. Last week John phoned up one of his small customers, Anna, to try and sell her some more drone deliveries. To his amazement Anna increased her order of scheduled drone deliveries by over 9000!
 
 Given this, John is sure that there are more customers out there just like Anna. He's also sure that it must be something to do with the fact that Anna's name is a palindrome. Given this, he wants a report including all the phone numbers for any current customer whose name is a palindrome.
 
