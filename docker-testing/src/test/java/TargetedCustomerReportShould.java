@@ -39,7 +39,7 @@ import can.touch.TargetedCustomerReport;
 import com.google.common.collect.ImmutableList;
 
 public class TargetedCustomerReportShould {
-    private static final ContactDetail ANNAS_NUMBER = new ContactDetail("12356");
+    private static final ContactDetail ANNAS_NUMBER = new ContactDetail("12356", "1");
 
     CustomerRepository repository = mock(CustomerRepository.class);
     TargetedCustomerReport report = new TargetedCustomerReport(repository);
