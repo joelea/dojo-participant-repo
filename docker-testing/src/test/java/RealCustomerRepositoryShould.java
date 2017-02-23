@@ -26,16 +26,17 @@
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import can.touch.CustomerRepository;
-import can.touch.Customer;
-import com.palantir.docker.compose.DockerComposeRule;
-import com.palantir.docker.compose.logging.LogDirectory;
+import static org.assertj.core.api.Assertions.assertThat;
+import static com.palantir.docker.compose.configuration.ShutdownStrategy.AGGRESSIVE;
+
 import org.junit.ClassRule;
 import org.junit.Test;
 
-import static com.palantir.docker.compose.configuration.ShutdownStrategy.AGGRESSIVE;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import com.palantir.docker.compose.DockerComposeRule;
+import com.palantir.docker.compose.logging.LogDirectory;
+
+import can.touch.Customer;
+import can.touch.CustomerRepository;
 
 public class RealCustomerRepositoryShould {
     private static final Customer AARON = new Customer(2, "Aaron");
@@ -57,7 +58,7 @@ public class RealCustomerRepositoryShould {
 
         Customer customer = repo.getCustomer(AARON.getId());
 
-        assertThat(customer, equalTo(AARON));
+        assertThat(customer).isEqualTo(AARON);
 
         repo.close();
     }
