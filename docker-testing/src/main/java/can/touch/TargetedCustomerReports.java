@@ -25,28 +25,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package can.touch;
 
-import can.touch.ContactDetail;
-import can.touch.CustomerRepository;
-import can.touch.TargettedCustomerReport;
-import com.google.common.collect.ImmutableList;
-import org.junit.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-public class TargettedCustomerReportShould {
-    private static final ContactDetail ANNAS_NUMBER = new ContactDetail("12356");
-
-    CustomerRepository repository = mock(CustomerRepository.class);
-    TargettedCustomerReport report = new TargettedCustomerReport(repository);
-
-    @Test public void
-    find_annas_number() {
-        when(repository.getAllContactDetails()).thenReturn(ImmutableList.of(ANNAS_NUMBER));
-
-        assertThat(report.getAllImportantNumbers(), contains(ANNAS_NUMBER.getPhoneNumber()));
-    }
+public class TargetedCustomerReports {
 }
