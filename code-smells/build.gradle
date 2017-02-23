@@ -1,3 +1,7 @@
+plugins {
+  id 'org.inferred.processors' version '1.2.8'
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -8,6 +12,8 @@ repositories {
 
 dependencies {
   compile 'com.google.guava:guava:17.0'
+
+  processor 'org.immutables:value:2.4.3'
 
   testCompile 'org.assertj:assertj-core:3.6.2'
   testCompile 'junit:junit:4.8.2'
