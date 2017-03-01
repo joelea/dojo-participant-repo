@@ -46,7 +46,7 @@ public class RealCustomerRepositoryShould {
 
     @Test public void
     load_customers_after_storing_them() {
-        CustomerRepository repo = CustomerRepository.createDefaultOnPort(docker.containers().container("db").port(5432).getExternalPort());
+        CustomerRepository repo = CustomerRepository.createDefaultOnPort(postgresPort());
 
         repo.createCustomerTable();
         repo.createPhoneNumberTable();
@@ -58,5 +58,9 @@ public class RealCustomerRepositoryShould {
         assertThat(customer).isEqualTo(AARON);
 
         repo.close();
+    }
+
+    private int postgresPort() {
+        return docker.containers().container("db").port(5432).getExternalPort();
     }
 }
