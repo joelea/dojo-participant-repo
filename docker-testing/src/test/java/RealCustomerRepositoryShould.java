@@ -30,6 +30,7 @@ import can.touch.Customer;
 import can.touch.CustomerRepository;
 import com.palantir.docker.compose.DockerComposeRule;
 import com.palantir.docker.compose.logging.LogDirectory;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -44,13 +45,18 @@ public class RealCustomerRepositoryShould {
             .saveLogsTo(LogDirectory.circleAwareLogDirectory(RealCustomerRepositoryShould.class))
             .build();
 
-    @Test public void
-    load_customers_after_storing_them() {
-        CustomerRepository repo = CustomerRepository.createDefaultOnPort(postgresPort());
+    private CustomerRepository repo;
+
+    @Before
+    public void setup() {
+        repo = CustomerRepository.createDefaultOnPort(postgresPort());
 
         repo.createCustomerTable();
         repo.createPhoneNumberTable();
+    }
 
+    @Test public void
+    load_customers_after_storing_them() {
         repo.insertCustomer(AARON.getId(), AARON.getName());
 
         Customer customer = repo.getCustomer(AARON.getId());
