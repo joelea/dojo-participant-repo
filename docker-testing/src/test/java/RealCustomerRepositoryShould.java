@@ -46,7 +46,7 @@ public class RealCustomerRepositoryShould {
 
     @Test public void
     load_customers_after_storing_them() {
-        CustomerRepository repo = CustomerRepository.createDefault();
+        CustomerRepository repo = CustomerRepository.createDefaultOnPort(docker.containers().container("db").port(5432).getExternalPort());
 
         repo.createCustomerTable();
         repo.createPhoneNumberTable();

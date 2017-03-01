@@ -37,8 +37,8 @@ import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 import java.util.List;
 
 public interface CustomerRepository {
-    static CustomerRepository createDefault() {
-        DBI dbi = new DBI(DataSourceFactory.create());
+    static CustomerRepository createDefaultOnPort(int port) {
+        DBI dbi = new DBI(DataSourceFactory.create(port));
         try {
             return Retrying.withRetry( () -> dbi.open(CustomerRepository.class));
         } catch (InterruptedException e) {
