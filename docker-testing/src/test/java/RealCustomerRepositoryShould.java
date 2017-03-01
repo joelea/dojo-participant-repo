@@ -37,7 +37,7 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RealCustomerRepositoryShould {
-    private static final Customer AARON = new Customer(2, "Aaron");
+    private static final Customer AARON = new Customer(2, "Aaron", "contact@email.test");
 
     @Rule
     public DockerComposeRule docker = DockerComposeRule.builder()
@@ -52,12 +52,12 @@ public class RealCustomerRepositoryShould {
         repo = CustomerRepository.createDefaultOnPort(postgresPort());
 
         repo.createCustomerTable();
-        repo.createPhoneNumberTable();
+        repo.createOrderTable();
     }
 
     @Test public void
     load_customers_after_storing_them() {
-        repo.insertCustomer(AARON.getId(), AARON.getName());
+        repo.insertCustomer(AARON.getId(), AARON.getName(), AARON.getContact());
 
         Customer customer = repo.getCustomer(AARON.getId());
 

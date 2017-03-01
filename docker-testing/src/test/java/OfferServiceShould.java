@@ -25,15 +25,40 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package can.touch;
 
-import java.util.List;
+import can.touch.Customer;
+import can.touch.CustomerRepository;
+import cannot.touch.EmailService;
+import can.touch.OfferService;
+import cannot.touch.TextService;
+import can.touch.TotalOrderValue;
+import com.google.common.collect.ImmutableList;
+import org.junit.Test;
 
-public class TargetedCustomerReport {
-    public TargetedCustomerReport(CustomerRepository repository) {
-    }
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-    public List<String> getAllImportantNumbers() {
-        return null;
+public class OfferServiceShould {
+    private static final int ID = 123;
+    private static final int VALUE = 9500;
+    private static final Customer AARON = new Customer(ID, "aaron", "aaron@email.test");
+
+    private final TotalOrderValue totalOrderValue = new TotalOrderValue(ID, VALUE);
+
+    private final CustomerRepository repository = mock(CustomerRepository.class);
+    private final EmailService emailService = mock(EmailService.class);
+    private final TextService textService = mock(TextService.class);
+
+    private final OfferService offers = new OfferService(repository, emailService, textService);
+
+    @Test public void
+    email_50_percent_offers_to_clients_with_an_email_address_and_over_9000_dollars_worth_of_orders() {
+        when(repository.getTotalOrderValues()).thenReturn(ImmutableList.of(totalOrderValue));
+        when(repository.getCustomer(ID)).thenReturn(AARON);
+
+        offers.sendOffers();
+
+        verify(emailService).sendEmail(AARON.getContact(), "Congratulations! You will receive a 50% discount on your next order!");
     }
 }
