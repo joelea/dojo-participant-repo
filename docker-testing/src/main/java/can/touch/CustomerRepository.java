@@ -46,7 +46,7 @@ public interface CustomerRepository {
         }
     }
 
-    @SqlUpdate("create table customers (id int primary key, name varchar(100), phonenumber varchar(15))")
+    @SqlUpdate("create table customers (id int primary key, name varchar(100))")
     void createCustomerTable();
 
     @SqlUpdate("create table phonenumbers (phonenumber varchar(15), customer_id int)")

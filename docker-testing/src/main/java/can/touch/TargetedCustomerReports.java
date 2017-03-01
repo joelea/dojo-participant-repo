@@ -27,13 +27,5 @@
  */
 package can.touch;
 
-import java.util.List;
-
-public class TargettedCustomerReport {
-    public TargettedCustomerReport(CustomerRepository repository) {
-    }
-
-    public List<String> getAllImportantNumbers() {
-        return null;
-    }
+public class TargetedCustomerReports {
 }

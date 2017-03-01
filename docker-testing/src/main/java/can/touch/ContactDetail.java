@@ -29,12 +29,19 @@ package can.touch;
 
 public class ContactDetail {
     private final String phoneNumber;
+    private final String customerId;
 
-    public ContactDetail(String phoneNumber) {
+    public ContactDetail(String phoneNumber, String customerId) {
         this.phoneNumber = phoneNumber;
+		this.customerId = customerId;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
+    
+    public String customerId() {
+    	return customerId;
+    }
+    
 }
