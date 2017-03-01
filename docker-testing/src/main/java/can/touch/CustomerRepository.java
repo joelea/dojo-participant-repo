@@ -37,8 +37,8 @@ import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 import java.util.List;
 
 public interface CustomerRepository {
-    static CustomerRepository createDefault() {
-        DBI dbi = new DBI(DataSourceFactory.create());
+    static CustomerRepository createDefaultOnPort(int port) {
+        DBI dbi = new DBI(DataSourceFactory.create(port));
         try {
             return Retrying.withRetry( () -> dbi.open(CustomerRepository.class));
         } catch (InterruptedException e) {
@@ -46,29 +46,37 @@ public interface CustomerRepository {
         }
     }
 
-    @SqlUpdate("create table customers (id int primary key, name varchar(100))")
+    @SqlUpdate("create table customers (id int primary key, name varchar(100), contact varchar(100))")
     void createCustomerTable();
 
-    @SqlUpdate("create table phonenumbers (phonenumber varchar(15), customer_id int)")
-    void createPhoneNumberTable();
+    @SqlUpdate("create table orders (order_value int, customer_id int)")
+    void createOrderTable();
 
-    @SqlUpdate("insert into customers (id, name) values (:id, :name)")
-    void insertCustomer(@Bind("id") int id, @Bind("name") String name);
+    @SqlUpdate("insert into customers (id, name, contact) values (:id, :name, :contact)")
+    void insertCustomer(@Bind("id") int id, @Bind("name") String name, @Bind("contact") String contact);
 
+    @SqlUpdate("insert into orders (order_value, customer_id) values (:order_value, :customer_id")
+    void insertOrder(@Bind("order_value") int orderValue, @Bind("customer_id") int customerId);
+
+    /*
+    ------ THIS IS AN EXAMPLE -------
+    | This is an example of how     |
+    | to create an object from a    |
+    | SQL query                     |
+    ---------------------------------
+    */
     @SqlQuery("select * from customers where id = :id")
     @Mapper(CustomerMapper.class)
     Customer getCustomer(@Bind("id") int id);
 
     /*
     ---- ADD IMPLEMENTATION HERE ----
-    | This method should join the   |
-    | customer table with the       |
-    | contact details table. Use    |
-    | similar annotations to        |
-    | `getCustomer` above.          |
+    | This method should get the    |
+    | value of orders for each      |
+    | customer                      |
     ---------------------------------
     */
-    List<ContactDetail> getAllContactDetails();
+    List<TotalOrderValue> getTotalOrderValues();
 
     /**
      * close with no args is used to close the connection

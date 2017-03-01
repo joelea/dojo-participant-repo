@@ -27,5 +27,21 @@
  */
 package can.touch;
 
-public class TargetedCustomerReports {
+import cannot.touch.EmailService;
+import cannot.touch.TextService;
+
+public class OfferService {
+    private final CustomerRepository repository;
+    private final EmailService emailService;
+    private final TextService textService;
+
+    public OfferService(CustomerRepository repository, EmailService emailService, TextService textService) {
+        this.repository = repository;
+        this.emailService = emailService;
+        this.textService = textService;
+    }
+
+    public void sendOffers() {
+
+    }
 }

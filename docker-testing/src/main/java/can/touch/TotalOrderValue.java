@@ -25,29 +25,49 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package can.touch;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+public class TotalOrderValue {
+    private final int customerId;
+    private final int orderTotal;
 
-import org.junit.Test;
+    public TotalOrderValue(int customerId, int orderTotal) {
+        this.customerId = customerId;
+        this.orderTotal = orderTotal;
+    }
 
-import can.touch.ContactDetail;
-import can.touch.CustomerRepository;
-import can.touch.TargetedCustomerReport;
+    public int getCustomerId() {
+        return customerId;
+    }
 
-import com.google.common.collect.ImmutableList;
+    public int getOrderTotal() {
+        return orderTotal;
+    }
 
-public class TargetedCustomerReportShould {
-    private static final ContactDetail ANNAS_NUMBER = new ContactDetail("12356", "1");
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-    CustomerRepository repository = mock(CustomerRepository.class);
-    TargetedCustomerReport report = new TargetedCustomerReport(repository);
+        TotalOrderValue that = (TotalOrderValue) o;
 
-    @Test public void
-    find_annas_number() {
-        when(repository.getAllContactDetails()).thenReturn(ImmutableList.of(ANNAS_NUMBER));
+        if (customerId != that.customerId) return false;
+        return orderTotal == that.orderTotal;
 
-        assertThat(report.getAllImportantNumbers()).contains(ANNAS_NUMBER.getPhoneNumber());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = customerId;
+        result = 31 * result + orderTotal;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TotalOrderValue{" +
+                "customerId=" + customerId +
+                ", orderTotal=" + orderTotal +
+                '}';
     }
 }

@@ -26,40 +26,47 @@
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static com.palantir.docker.compose.configuration.ShutdownStrategy.AGGRESSIVE;
-
-import org.junit.ClassRule;
-import org.junit.Test;
-
-import com.palantir.docker.compose.DockerComposeRule;
-import com.palantir.docker.compose.logging.LogDirectory;
-
 import can.touch.Customer;
 import can.touch.CustomerRepository;
+import com.palantir.docker.compose.DockerComposeRule;
+import com.palantir.docker.compose.logging.LogDirectory;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RealCustomerRepositoryShould {
-    private static final Customer AARON = new Customer(2, "Aaron");
-    @ClassRule
-    public static DockerComposeRule docker = DockerComposeRule.builder()
+    private static final Customer AARON = new Customer(2, "Aaron", "contact@email.test");
+
+    @Rule
+    public DockerComposeRule docker = DockerComposeRule.builder()
             .file("docker-compose.yml")
             .saveLogsTo(LogDirectory.circleAwareLogDirectory(RealCustomerRepositoryShould.class))
-            .shutdownStrategy(AGGRESSIVE)
             .build();
 
+    private CustomerRepository repo;
+
+    @Before
+    public void setup() {
+        repo = CustomerRepository.createDefaultOnPort(postgresPort());
+
+        repo.createCustomerTable();
+        repo.createOrderTable();
+    }
 
     @Test public void
     load_customers_after_storing_them() {
-        CustomerRepository repo = CustomerRepository.createDefault();
-        repo.createCustomerTable();
-        repo.createPhoneNumberTable();
-
-        repo.insertCustomer(AARON.getId(), AARON.getName());
+        repo.insertCustomer(AARON.getId(), AARON.getName(), AARON.getContact());
 
         Customer customer = repo.getCustomer(AARON.getId());
 
         assertThat(customer).isEqualTo(AARON);
 
         repo.close();
+    }
+
+    private int postgresPort() {
+        return docker.containers().container("db").port(5432).getExternalPort();
     }
 }

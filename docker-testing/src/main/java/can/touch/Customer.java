@@ -29,10 +29,13 @@ package can.touch;/*
 public class Customer {
     private final int id;
     private final String name;
+    // This might be an email address or a phone number
+    private final String contact;
 
-    public Customer(int id, String name) {
+    public Customer(int id, String name, String contact) {
         this.id = id;
         this.name = name;
+        this.contact = contact;
     }
 
     public String getName() {
@@ -43,6 +46,10 @@ public class Customer {
         return id;
     }
 
+    public String getContact() {
+        return contact;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,14 +58,25 @@ public class Customer {
         Customer customer = (Customer) o;
 
         if (id != customer.id) return false;
-        return name.equals(customer.name);
+        if (name != null ? !name.equals(customer.name) : customer.name != null) return false;
+        return !(contact != null ? !contact.equals(customer.contact) : customer.contact != null);
 
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + name.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (contact != null ? contact.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", contact='" + contact + '\'' +
+                '}';
     }
 }
