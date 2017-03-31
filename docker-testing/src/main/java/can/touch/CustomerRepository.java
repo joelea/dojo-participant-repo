@@ -55,7 +55,7 @@ public interface CustomerRepository {
     @SqlUpdate("insert into customers (id, name, contact) values (:id, :name, :contact)")
     void insertCustomer(@Bind("id") int id, @Bind("name") String name, @Bind("contact") String contact);
 
-    @SqlUpdate("insert into orders (order_value, customer_id) values (:order_value, :customer_id")
+    @SqlUpdate("insert into orders (order_value, customer_id) values (:order_value, :customer_id)")
     void insertOrder(@Bind("order_value") int orderValue, @Bind("customer_id") int customerId);
 
     /*
