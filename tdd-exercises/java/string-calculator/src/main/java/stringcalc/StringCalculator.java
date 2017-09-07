@@ -2,6 +2,10 @@ package stringcalc;
 
 public class StringCalculator {
     public static int calculate(String expression) {
-        return 0;
+        if (expression.length() == 0) {
+            return 0;
+        }
+
+        return 2;
     }
 }

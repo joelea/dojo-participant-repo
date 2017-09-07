@@ -10,4 +10,10 @@ public class StringCalculatorShould {
         int total = StringCalculator.calculate("");
         assertThat(total).isEqualTo(0);
     }
+
+    @Test
+    public void return_2_for_just_the_number_2() {
+        int total = StringCalculator.calculate("2");
+        assertThat(total).isEqualTo(2);
+    }
 }
