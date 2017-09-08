@@ -2,6 +2,6 @@ version: "2"
 
 services:
   db:
-    image: kiasaki/alpine-postgres
+    image: kiasaki/alpine-postgres:9.5
     ports:
       - 5432

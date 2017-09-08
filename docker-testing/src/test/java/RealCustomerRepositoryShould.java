@@ -29,6 +29,7 @@
 import can.touch.Customer;
 import can.touch.CustomerRepository;
 import com.palantir.docker.compose.DockerComposeRule;
+import com.palantir.docker.compose.configuration.ShutdownStrategy;
 import com.palantir.docker.compose.logging.LogDirectory;
 import org.junit.Before;
 import org.junit.Rule;
@@ -43,6 +44,7 @@ public class RealCustomerRepositoryShould {
     public DockerComposeRule docker = DockerComposeRule.builder()
             .file("docker-compose.yml")
             .saveLogsTo(LogDirectory.circleAwareLogDirectory(RealCustomerRepositoryShould.class))
+            .shutdownStrategy(ShutdownStrategy.AGGRESSIVE)
             .build();
 
     private CustomerRepository repo;
